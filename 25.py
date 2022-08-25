@@ -2,7 +2,7 @@
 # class ListNode:
 #     def __init__(self, val=0, next=None):
 #         self.val = val
-#         self.next = next
+#         self.next = next#
 
 class Solution:
     # 翻转一个子链表，并且返回新的头与尾
