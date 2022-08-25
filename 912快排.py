@@ -9,7 +9,7 @@ class Solution:
         nums[pivot], nums[r] = nums[r], nums[pivot]
         i = l;
         for j in range(l, r):
-            #小于基准值的放一边(分界线就是nums[i])
+            #小于基准值的放一边(最终分界线下表就是i，因为i之前的下表都是小于基准值的)
             if nums[j] < nums[r]:
                 nums[j], nums[i] = nums[i], nums[j]
                 i +=1;
@@ -18,9 +18,13 @@ class Solution:
         return i
 
     def randomized_quicksort(self, nums, l, r):
+        #partition时候最小会返回i==l的情况，即mid = l，此时如果做quicksort，
+        #会出现l > r的情况，因此这时需要直接返回
+        #当做快速选择时候（topK），这里不要用<=,而用<
         if r <= l:
             return
         #快排就是分区排序，把小于基准值的放一边，大于基准值的放另一边
+        #每次分区都能将基准值的下标确定好，根据这种性质可以解决topK问题
         #然后递归对每个分区进行排序
         mid = self.randomized_partition(nums, l, r)
         self.randomized_quicksort(nums, l, mid - 1)
