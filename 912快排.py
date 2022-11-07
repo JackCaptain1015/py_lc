@@ -34,3 +34,59 @@ class Solution:
         self.randomized_quicksort(nums, 0, len(nums) - 1)
         return nums
 
+    # 堆排序与快排
+
+    class test:
+
+        def quickSort(self, nums, left, right):
+            if left > right:
+                return;
+            mid = self.quickPart(nums, left, right);
+            self.quickSort(nums, left, mid - 1);
+            self.quickSort(nums, mid + 1, right);
+
+        def quickPart(self, nums, left, right):
+            pivot = random.randint(left, right);
+            nums[right], nums[pivot] = nums[pivot], nums[right];
+            i = left;
+            for j in range(left, right):
+                if nums[j] < nums[right]:
+                    nums[j], nums[i] = nums[i], nums[j];
+                    i += 1;
+            nums[i], nums[right] = nums[right], nums[i];
+            return i;
+
+        def mergeSort(self, nums):
+            if len(nums) <= 1:
+                return nums;
+            mid = len(nums) // 2;
+            lNums, rNums = self.mergeSort(nums[:mid]), self.mergeSort(nums[mid:]);
+            return self.merge(lNums, rNums);
+
+        def merge(self, lNums, rNums):
+            lLen, rLen = len(lNums), len(rNums);
+            l, r = 0, 0;
+            nums = [];
+            while l < lLen and r < rLen:
+                if lNums[l] < rNums[r]:
+                    nums.append(lNums[l]);
+                    l += 1;
+                else:
+                    nums.append(rNums[r]);
+                    r += 1;
+            if l >= lLen:
+                for num in rNums[r:]:
+                    nums.append(num);
+            if r >= rLen:
+                for num in lNums[l:]:
+                    nums.append(num);
+            return nums;
+
+    if __name__ == '__main__':
+        t = test();
+        nums = [4, 2, 6, 1, 7, 23, 7];
+        n = t.mergeSort(nums);
+        print(n)
+        print(nums)
+        n2 = t.quickSort(nums, 0, len(nums) - 1);
+        print(nums)
