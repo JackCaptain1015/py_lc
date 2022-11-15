@@ -1,3 +1,5 @@
+##LRU，双链表+map,map用来快速获取，双链表用来管理元素的存活
+#最近使用的元素放在链表头，新增超过容量后删除最尾端数据
 class Node:
     def __init__(self,key = 0,val = 0):
         self.key = key;

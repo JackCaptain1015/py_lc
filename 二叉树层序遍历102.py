@@ -6,13 +6,14 @@
 #         self.right = right
 class Solution:
     def levelOrder(self, root: TreeNode) -> List[List[int]]:
+        #1、验证
         if root is None:
             return [];
         res = [];
         #需要一个队列，这个队列就是一层中所有的元素
         #也就是说，queue.size遍历完就是一个集合list，需要res.append(list)
         queue = [root];
-
+        #2、遍历每层队列
         while len(queue) > 0:
             list = [];
             size = len(queue);
