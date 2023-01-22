@@ -12,8 +12,8 @@ class Solution:
     因为球的是nums[i:j]之间和为k的连续子序列数，所以nums[i:j] = nums[:j]-nums[:i] = k，
     因此key则是nums[:i] = nums[:j] - k，其中nums[:j]则为sum。
     所以如果sumMap.get(sum-k)存在，即这个连续子序列满足和为k。（连续由遍历保证）。
-    又因为相同和的子序列可能出现多个，所以是ans += sumMap.get(sum-k)，而不是ans +=1。
-
+    又因为相同和的子序列可能出现多个,所以答案为所有下标结尾的和为 k 的子序列个数之和，
+    即ans += sumMap.get(sum-k)，而不是ans +=1。
     '''
     def subarraySum(self, nums: List[int], k: int) -> int:
         sum = 0;
