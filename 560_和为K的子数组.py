@@ -14,6 +14,9 @@ class Solution:
     所以如果sumMap.get(sum-k)存在，即这个连续子序列满足和为k。（连续由遍历保证）。
     又因为相同和的子序列可能出现多个,所以答案为所有下标结尾的和为 k 的子序列个数之和，
     即ans += sumMap.get(sum-k)，而不是ans +=1。
+    (这里ans在循环里重复加，是因为比如B连续子序列包含A连续子序列，且两者和一致，那么B的子序列数= A子序列数+B本身，
+    所以如果一个序列中包含A与B，那么等于A+A+1，所以这里在循环中重复累加
+    )
     '''
     def subarraySum(self, nums: List[int], k: int) -> int:
         sum = 0;
@@ -22,8 +25,7 @@ class Solution:
         sumMap[0] = 1;
         for i in range(len(nums)):
             sum += nums[i];
-            if sumMap.get(sum-k):
-                ans += sumMap.get(sum-k);
+            ans += sumMap.get(sum-k);
             sumMap[sum] += 1;
         return ans;
 
